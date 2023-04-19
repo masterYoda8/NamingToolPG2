@@ -19,7 +19,7 @@ jobs:
       run: sudo apt-get install g++
     - name: Compile main.cpp
       run: |
-        if ! g++ main.cpp -o output; then
+        if ! bash install.sh testName; then
           echo "Compilation failed"
           exit 1
         fi
