@@ -20,9 +20,9 @@ std::vector<subject> subjects;
 
 void initSubjectVector();
 std::string createFileName();
-std::string extractPractiseNumber(std::string);
-std::string extractTaskNumber(std::string);
-int getSubjectIndex(std::string);
+std::string extractPractiseNumber(const std::string &);
+std::string extractTaskNumber(const std::string &);
+int getSubjectIndex(const std::string &);
 
 
 int main(int argc, char* argv[]) {
@@ -50,16 +50,17 @@ void initSubjectVector() {
 
 std::string createFileName() {
     // get current filepath
-    std::string filePath = static_cast<std::string>(std::filesystem::current_path());
+    const std::string filePath = static_cast<std::string>(std::filesystem::current_path());
+    const std::string & filePathRef = filePath;
 
     // search for a subject in the current filepath; exit if no subject found
-    int subjectIndex = getSubjectIndex(filePath);
+    int subjectIndex = getSubjectIndex(filePathRef);
     std::string subjectNameInFile = subjects.at(subjectIndex).nameInFile;
     std::string groupName = subjects.at(subjectIndex).groupName; 
 
     // extract numbers from path
-    std::string practiseNumber = extractPractiseNumber(filePath);
-    std::string taskNumber = extractTaskNumber(filePath);
+    std::string practiseNumber = extractPractiseNumber(filePathRef);
+    std::string taskNumber = extractTaskNumber(filePathRef);
 
     // create new filename and return
     std::stringstream newFileName;
@@ -67,13 +68,13 @@ std::string createFileName() {
     return newFileName.str();   
 }
 
-int getSubjectIndex(std::string filePath) {
+int getSubjectIndex(const std::string & filePathRef) {
 
     int counter;
 
     for(counter = 0; counter < subjects.size(); counter++){
 
-	std::size_t found = filePath.find(subjects.at(counter).nameInPath);
+	std::size_t found = filePathRef.find(subjects.at(counter).nameInPath);
 
 	if(found != std::string::npos) break;
 
@@ -89,13 +90,13 @@ int getSubjectIndex(std::string filePath) {
     return counter;
 }
 
-std::string extractPractiseNumber(std::string filePath) {
+std::string extractPractiseNumber(const std::string & filePathRef) {
 
-    std::size_t found = filePath.find(PRACTISE_STRING);
+    std::size_t found = filePathRef.find(PRACTISE_STRING);
 
     if(found != std::string::npos){
 
-  	return filePath.substr((found + PRACTISE_STRING_LENGTH), 2);	
+  	return filePathRef.substr((found + PRACTISE_STRING_LENGTH), 2);	
 
     } else {
 
@@ -105,13 +106,13 @@ std::string extractPractiseNumber(std::string filePath) {
     }  
 }
 
-std::string extractTaskNumber(std::string filePath) {
+std::string extractTaskNumber(const std::string & filePathRef) {
     
-    std::size_t found = filePath.find(TASK_STRING);
+    std::size_t found = filePathRef.find(TASK_STRING);
 
     if(found != std::string::npos){
     
-        return filePath.substr((found + TASK_STRING_LENGTH), 1);
+        return filePathRef.substr((found + TASK_STRING_LENGTH), 1);
 
     } else {
 
