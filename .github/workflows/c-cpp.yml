@@ -23,3 +23,22 @@ jobs:
           echo "Compilation failed"
           exit 1
         fi
+        mkdir pg2
+        mkdir pg2/u32
+        mkdir pg2/u32/a4
+        cd pg2/u32/a4
+        touch exampleFile.txt
+        if ! testName exampleFile.txt; then
+           echo "Error while calling naming tool on PG2"
+           exit 1
+        fi
+        cd ../../..
+        mkdir ds
+        mkdir ds/u03
+        mkdir ds/u03/a12
+        cd ds/u03/a12
+        touch exampleFile.txt 
+        if ! testName exampleFile.txt; then
+           echo "Error while calling naming tool on DS"
+           exit 1
+        fi
