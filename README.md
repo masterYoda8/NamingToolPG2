@@ -16,7 +16,7 @@ With install.sh an install-script is provided so you don't to compile anything b
 
 You can use it the following way:
 ```bash
-bash instal.sh <name_of_the_programm>
+bash install.sh <name_of_the_programm>
 ```
 
 
