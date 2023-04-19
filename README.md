@@ -14,12 +14,16 @@ PG2-1-14 is specified in tool.cpp. The 02 and 3 would be changed because of the 
 
 - Download tool.cpp file.
 - Compile it on your machine.
-
+```bash
 	g++ main.cpp -o "name to call the programm"
-
+```
 - Add compiled file to /usr/local/bin path.
 
 	Linux:
+	```bash
 	    - sudo mv "filepath to compiled programm" /usr/local/bin
+	```
 	OSX:
+	```bash
 	    - mv "filepath to compiled programm" /usr/local/bin
+	```
