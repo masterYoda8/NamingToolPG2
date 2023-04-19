@@ -1,0 +1,25 @@
+name: Compile main.cpp on push or pull_request
+
+on:
+  push:
+    branches: [ "main", "dev" ]
+  pull_request:
+    branches: [ "main", "dev" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Install C++ Compiler
+      run: sudo apt-get install g++
+    - name: Compile main.cpp
+      run: |
+        if ! g++ main.cpp -o output; then
+          echo "Compilation failed"
+          exit 1
+        fi
