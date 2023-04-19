@@ -35,6 +35,10 @@ jobs:
            echo "Error while calling naming tool on PG2"
            exit 1
         fi
+        if ! mv PG2-1-13_U32_4.txt exampleFile.txt; then
+           echo "Error: wrong file name for PG2"
+           exit 1
+        fi
         cd ../../..
         
     - name: Test for DS
@@ -46,5 +50,9 @@ jobs:
         touch exampleFile.txt 
         if ! testName exampleFile.txt; then
            echo "Error while calling naming tool on DS"
+           exit 1
+        fi
+        if ! mv DS-3-14_U03_13.txt exampleFile.txt; then
+           echo "Error: wrong file name for DS"
            exit 1
         fi
