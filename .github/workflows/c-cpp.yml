@@ -35,7 +35,7 @@ jobs:
            echo "Error while calling naming tool on PG2"
            exit 1
         fi
-        if ! mv PG2-1-13_U32_4.txt exampleFile.txt; then
+        if ! mv PG2-1-14_U32_4.txt exampleFile.txt; then
            echo "Error: wrong file name for PG2"
            exit 1
         fi
