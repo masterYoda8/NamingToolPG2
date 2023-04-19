@@ -23,6 +23,9 @@ jobs:
           echo "Compilation failed"
           exit 1
         fi
+        
+    - name: Test for PG2
+      run: |
         mkdir pg2
         mkdir pg2/u32
         mkdir pg2/u32/a4
@@ -33,6 +36,9 @@ jobs:
            exit 1
         fi
         cd ../../..
+        
+    - name: Test for DS
+      run: |
         mkdir ds
         mkdir ds/u03
         mkdir ds/u03/a12
