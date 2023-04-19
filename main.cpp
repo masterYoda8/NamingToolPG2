@@ -27,7 +27,7 @@ int getSubjectIndex(const std::string &);
 
 int main(int argc, char* argv[]) {
     if (argc != 2){
-	std::cerr << "Usage: submit filepath" << std::endl;
+	std::cerr << "Usage: " << BASH_NAME << " filepath" << std::endl;
 	std::cerr << "No files have been changed" << std::endl;
 	std::exit(1);
     }
