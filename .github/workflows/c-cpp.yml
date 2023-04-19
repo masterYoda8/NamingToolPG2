@@ -45,14 +45,14 @@ jobs:
       run: |
         mkdir ds
         mkdir ds/u03
-        mkdir ds/u03/a12
-        cd ds/u03/a12
+        mkdir ds/u03/a9
+        cd ds/u03/a9
         touch exampleFile.txt 
         if ! testName exampleFile.txt; then
            echo "Error while calling naming tool on DS"
            exit 1
         fi
-        if ! mv DS-3-14_U03_13.txt exampleFile.txt; then
+        if ! mv DS-3-14_U03_9.txt exampleFile.txt; then
            echo "Error: wrong file name for DS"
            exit 1
         fi
