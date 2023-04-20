@@ -19,7 +19,6 @@ typedef struct {
 std::vector<subject> subjects; 
 
 void initSubjectVector();
-std::string createFileName();
 std::string extractPractiseNumber(const std::string &);
 std::string extractTaskNumber(const std::string &);
 int getSubjectIndex(const std::string &);
