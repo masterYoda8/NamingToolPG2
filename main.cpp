@@ -7,6 +7,10 @@
 
 const std::string PRACTISE_STRING = "/u";
 const std::string TASK_STRING = "/a";
+const std::string COLOR_RED = "\033[1;31m";
+const std::string COLOR_GREEN = "\033[1;32m";
+const std::string COLOR_YELLOW = "\033[1;33m";
+const std::string COLOR_RESET = "\033[0m";
 constexpr int PRACTISE_STRING_LENGTH = 2;
 constexpr int TASK_STRING_LENGTH = 2;
 
@@ -27,8 +31,8 @@ int getSubjectIndex(const std::string &);
 
 int main(int argc, char* argv[]) {
     if (argc != 2){
-	std::cerr << "Usage: " << BASH_NAME << " filepath" << std::endl;
-	std::cerr << "No files have been changed" << std::endl;
+	std::cerr << COLOR_YELLOW << "Usage: " << BASH_NAME << " filepath" << std::endl;
+	std::cerr << "No files have been changed" << COLOR_RESET << std::endl;
 	std::exit(1);
     }
     
@@ -36,7 +40,7 @@ int main(int argc, char* argv[]) {
     std::string newFileName = createFileName();
     std::rename(argv[1], newFileName.c_str());
     
-    std::cout << "Renamed:  " << argv[1] << " --> " << newFileName << std::endl;
+    std::cout << "Renamed:  " << argv[1] << " --> " << COLOR_GREEN << newFileName << COLOR_RESET << std::endl;
     return 0;
 }
 
@@ -82,7 +86,7 @@ int getSubjectIndex(const std::string & filePathRef) {
 
     if(counter == subjects.size()){
 
-        std::cerr << "No subject has been found in the filepath" << std::endl;
+        std::cerr << COLOR_RED << "No subject has been found in the filepath" << COLOR_RESET << std::endl;
 	std::exit(1);
 
     }
@@ -100,7 +104,7 @@ std::string extractPractiseNumber(const std::string & filePathRef) {
 
     } else {
 
-        std::cerr << "No practise has been found in the filepath" << std::endl;
+        std::cerr << COLOR_RED << "No practise has been found in the filepath" << COLOR_RESET << std::endl;
         std::exit(1);
 	
     }  
@@ -116,7 +120,7 @@ std::string extractTaskNumber(const std::string & filePathRef) {
 
     } else {
 
-	std::cerr << "No task has been found in the filepath" << std::endl;
+	std::cerr << COLOR_RED << "No task has been found in the filepath" << COLOR_RESET << std::endl;
         std::exit(1);
 
     }
