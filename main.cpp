@@ -55,16 +55,15 @@ void initSubjectVector() {
 std::string createFileName() {
     // get current filepath
     const std::string filePath = static_cast<std::string>(std::filesystem::current_path());
-    const std::string & filePathRef = filePath;
 
     // search for a subject in the current filepath; exit if no subject found
-    int subjectIndex = getSubjectIndex(filePathRef);
+    int subjectIndex = getSubjectIndex(filePath);
     std::string subjectNameInFile = subjects.at(subjectIndex).nameInFile;
     std::string groupName = subjects.at(subjectIndex).groupName; 
 
     // extract numbers from path
-    std::string practiseNumber = extractPractiseNumber(filePathRef);
-    std::string taskNumber = extractTaskNumber(filePathRef);
+    std::string practiseNumber = extractPractiseNumber(filePath);
+    std::string taskNumber = extractTaskNumber(filePath);
 
     // create new filename and return
     std::stringstream newFileName;
