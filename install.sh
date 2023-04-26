@@ -4,8 +4,9 @@
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 # exit if no program name provided
-if [ -z $1 ]; then
-  echo -e "\033[1;33musage bash install.sh \033[1;31m<program_name>\033[0m"
+if [ -z $1 ]; then 
+  echo -e "\033[1;31mInstallation Error!\033[0m"
+  echo -e "\033[1;33mUsage: bash install.sh \033[1;31m<program_name>\033[0m"
   exit 1
 fi
 
