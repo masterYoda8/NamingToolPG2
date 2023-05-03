@@ -4,6 +4,7 @@
 #include <string>
 #include <filesystem>
 #include <cstdlib>
+#include <cstring>
 
 const std::string PRACTISE_STRING = "/u";
 const std::string TASK_STRING = "/a";
@@ -23,24 +24,32 @@ typedef struct {
 std::vector<subject> subjects; 
 
 void initSubjectVector();
-std::string createFileName();
+std::string createFileName(const std::string &);
 std::string extractPractiseNumber(const std::string &);
 std::string extractTaskNumber(const std::string &);
 int getSubjectIndex(const std::string &);
 
 
 int main(int argc, char* argv[]) {
-    if (argc != 2){
+    if (argc < 2 || argc > 4){
 	std::cerr << COLOR_YELLOW << "Usage: " << BASH_NAME << " filepath" << std::endl;
 	std::cerr << "No files have been changed" << COLOR_RESET << std::endl;
 	std::exit(1);
     }
     
+    std::string addon = "";
+
+    if (argc == 4 && !(strcmp(argv[2], "-a"))) {
+       addon = "_" + static_cast<std::string>(argv[3]); 
+    }
+
     initSubjectVector();
-    std::string newFileName = createFileName();
+    std::string newFileName = createFileName(addon);
+
     std::rename(argv[1], newFileName.c_str());
     
     std::cout << "Renamed:  " << argv[1] << " --> " << COLOR_GREEN << newFileName << COLOR_RESET << std::endl;
+
     return 0;
 }
 
@@ -52,7 +61,7 @@ void initSubjectVector() {
     // add more subjects here
 }
 
-std::string createFileName() {
+std::string createFileName(const std::string & addon) {
     // get current filepath
     const std::string filePath = static_cast<std::string>(std::filesystem::current_path());
 
@@ -67,7 +76,7 @@ std::string createFileName() {
 
     // create new filename and return
     std::stringstream newFileName;
-    newFileName <<  subjectNameInFile << '-' << groupName << "_U" << practiseNumber << "_" << taskNumber << ".txt";
+    newFileName <<  subjectNameInFile << '-' << groupName << "_U" << practiseNumber << "_" << taskNumber << addon << ".txt";
     return newFileName.str();   
 }
 
