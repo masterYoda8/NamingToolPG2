@@ -15,8 +15,17 @@ TEST(getSubjectIndex, returnsIndexForValidSubjectInFilePath) {
 }
 
 TEST(extractPractiseNumber, returnsPractiseNumberString) {
-    std::string filePathWithPractiseNumber = "test/this/u49/seven/eight";
+    std::string filePathWithPractiseNumber1 = "test/this/u49/seven/eight";
+    std::string filePathWithPractiseNumber2 = "test/this/u03/seven/eight";
 
-    ASSERT_THAT(extractPractiseNumber(filePathWithPractiseNumber), Eq("49"));
+    ASSERT_THAT(extractPractiseNumber(filePathWithPractiseNumber1), Eq("49"));
+    ASSERT_THAT(extractPractiseNumber(filePathWithPractiseNumber2), Eq("03"));
 }
 
+TEST(extractTaskNumber, returnsTaskNumberString) {
+    std::string filePathWithTaskNumber1 = "test/this/a9/seven/eight";
+    std::string filePathWithTaskNumber2 = "test/this/a3/seven/eight";
+
+    ASSERT_THAT(extractTaskNumber(filePathWithTaskNumber1), Eq("9"));
+    ASSERT_THAT(extractTaskNumber(filePathWithTaskNumber2), Eq("3"));
+}
