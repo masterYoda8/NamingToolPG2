@@ -13,6 +13,7 @@ PG2-1-14 is specified in main.cpp. The 02 and 3 would be changed because of the 
 
 ### Flags:
 -a addonName: addonName is appended to end of file name. Using the previous example and "main" as addonName the output file would be PG2-1-14_U02_3_main.txt. 
+-f: Keeps current file format and does not change it to .txt.
 
 ## How to install
 
