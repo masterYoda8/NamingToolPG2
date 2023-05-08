@@ -32,6 +32,7 @@ jobs:
         cd pg2/u32/a4
         touch exampleFile.txt 
         touch testFlagsfile.txt
+        touch test-FFlagsfile.txt
         
         if ! testName exampleFile.txt; then
            echo "Error while calling naming tool on PG2"
@@ -51,6 +52,15 @@ jobs:
            exit 1
         fi
         
+        if ! testName test-FFlagsfile.pdf -f; then
+           echo "Error while calling naming tool with flag option -f on PG2"
+           exit 1
+        fi
+        if ! mv PG2-1-14_U32_4.pdf testFlagsfile.pdf; then
+           echo "Error: wrong file name for PG2 with flag option"
+           exit 1
+        fi
+        
         cd ../../..
         sudo rm -rf pg2
         
@@ -62,6 +72,8 @@ jobs:
         cd ds/u03/a9
         touch exampleFile.txt 
         touch testFlagsfile.txt 
+        touch test-FFlagsfile.txt
+
         
         if ! testName exampleFile.txt; then
            echo "Error while calling naming tool on DS"
@@ -77,6 +89,15 @@ jobs:
            exit 1
         fi
         if ! mv DS-3-14_U03_9_TEST.txt testFlagsfile.txt; then
+           echo "Error: wrong file name for DS with flag option"
+           exit 1
+        fi
+        
+        if ! testName test-FFlagsfile.pdf -f; then
+           echo "Error while calling naming tool with flag option on DS"
+           exit 1
+        fi
+        if ! mv DS-3-14_U03_9.pdf test-FFlagsfile.pdf; then
            echo "Error: wrong file name for DS with flag option"
            exit 1
         fi
