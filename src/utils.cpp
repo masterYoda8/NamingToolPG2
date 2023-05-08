@@ -18,7 +18,7 @@ void initSubjectVector() {
     // add more subjects here
 }
 
-std::string createFileName(const std::string & addon) {
+std::string createFileName(const std::string & addon, const std::string & fileFormatExtension) {
     
     initSubjectVector();
 
@@ -36,7 +36,7 @@ std::string createFileName(const std::string & addon) {
 
     // create new filename and return
     std::stringstream newFileName;
-    newFileName <<  subjectNameInFile << '-' << groupName << "_U" << practiseNumber << "_" << taskNumber << addon << ".txt";
+    newFileName <<  subjectNameInFile << '-' << groupName << "_U" << practiseNumber << "_" << taskNumber << addon << fileFormatExtension;
     return newFileName.str();   
 }
 

@@ -20,7 +20,7 @@ typedef struct {
 } subject;
 
 void initSubjectVector();
-std::string createFileName(const std::string &);
+std::string createFileName(const std::string &, const std::string &);
 std::string extractPractiseNumber(const std::string &);
 std::string extractTaskNumber(const std::string &);
 int getSubjectIndex(const std::string &);
