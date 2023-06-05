@@ -3,6 +3,7 @@
 #include <sstream>
 #include <filesystem>
 #include <iostream>
+#include <fstream>
 
 #include "utils.h"
 
@@ -16,6 +17,22 @@ void initSubjectVector() {
     subject pg2 {"pg2", "PG2", "1-14"};
     subjects.push_back(pg2);
     // add more subjects here
+}
+
+void addOldFileName(std::filesystem::path filePath) {
+    std::ofstream outputFile("tmp");
+    std::ifstream inputFile(filePath);
+    
+    if (outputFile.fail() || inputFile.fail()){return;}
+
+    outputFile << "// Renamed from: " << filePath << "\n\n";
+    outputFile << inputFile.rdbuf();
+
+    inputFile.close();
+    outputFile.close(); 
+
+    std::remove(filePath.c_str());
+    std::rename("tmp", filePath.c_str());
 }
 
 std::string createFileName(const std::string & addon, const std::string & fileFormatExtension) {

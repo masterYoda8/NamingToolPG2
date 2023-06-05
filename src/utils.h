@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <filesystem>
 
 const std::string PRACTISE_STRING = "/u";
 const std::string TASK_STRING = "/a";
@@ -20,6 +21,7 @@ typedef struct {
 } subject;
 
 void initSubjectVector();
+void addOldFileName(std::filesystem::path);
 std::string createFileName(const std::string &, const std::string &);
 std::string extractPractiseNumber(const std::string &);
 std::string extractTaskNumber(const std::string &);

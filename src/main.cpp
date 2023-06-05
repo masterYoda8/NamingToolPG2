@@ -13,7 +13,9 @@ int main(int argc, char* argv[]) {
 	std::exit(1);
     }
 
-    std::filesystem::path  filePath = static_cast<std::filesystem::path >(argv[1]);
+    std::filesystem::path filePath = static_cast<std::filesystem::path>(argv[1]);
+
+    addOldFileName(filePath);
     
     std::string fileFormatExtension = ".txt";
     std::string addon = "";
