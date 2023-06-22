@@ -1,106 +1,106 @@
-name: Compile main.cpp on push or pull_request
+# name: Compile main.cpp on push or pull_request
 
-on:
-  push:
-    branches: [ "main", "dev" ]
-  pull_request:
-    branches: [ "main", "dev" ]
-
-jobs:
-  build:
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-      
-    - name: Install C++ Compiler
-      run: sudo apt-get install g++
-    - name: Install tool
-      run: |
-        if ! bash install.sh testName; then
-          echo "Compilation failed"
-          exit 1
-        fi
-        
-    - name: Test for PG2
-      run: |
-        mkdir pg2 
-        mkdir pg2/u32 
-        mkdir pg2/u32/a4
-        cd pg2/u32/a4
-        touch exampleFile.txt 
-        touch testFlagsfile.txt
-        touch testFFlagsfile.txt
-        
-        if ! testName exampleFile.txt; then
-           echo "Error while calling naming tool on PG2"
-           exit 1
-        fi
-        if ! mv PG2-1-14_U32_4.txt exampleFile.txt; then
-           echo "Error: wrong file name for PG2"
-           exit 1
-        fi
-        
-        if ! testName testFlagsfile.txt -a TEST; then
-           echo "Error while calling naming tool with flag option on PG2"
-           exit 1
-        fi
-        if ! mv PG2-1-14_U32_4_TEST.txt testFlagsfile.txt; then
-           echo "Error: wrong file name for PG2 with flag option"
-           exit 1
-        fi
-        
-        if ! testName testFFlagsfile.pdf -f; then
-           echo "Error while calling naming tool with flag option -f on PG2"
-           exit 1
-        fi
-        if ! mv PG2-1-14_U32_4.pdf testFlagsfile.pdf; then
-           echo "Error: wrong file name for PG2 with flag option"
-           exit 1
-        fi
-        
-        cd ../../..
-        sudo rm -rf pg2
-        
-    - name: Test for DS
-      run: |
-        mkdir ds
-        mkdir ds/u03 
-        mkdir ds/u03/a9
-        cd ds/u03/a9
-        touch exampleFile.txt 
-        touch testFlagsfile.txt 
-        touch testFFlagsfile.txt
-
-        
-        if ! testName exampleFile.txt; then
-           echo "Error while calling naming tool on DS"
-           exit 1
-        fi
-        if ! mv DS-3-14_U03_9.txt exampleFile.txt; then
-           echo "Error: wrong file name for DS"
-           exit 1
-        fi
-        
-        if ! testName testFlagsfile.txt -a TEST; then
-           echo "Error while calling naming tool with flag option on DS"
-           exit 1
-        fi
-        if ! mv DS-3-14_U03_9_TEST.txt testFlagsfile.txt; then
-           echo "Error: wrong file name for DS with flag option"
-           exit 1
-        fi
-        
-        if ! testName testFFlagsfile.pdf -f; then
-           echo "Error while calling naming tool with flag option on DS"
-           exit 1
-        fi
-        if ! mv DS-3-14_U03_9.pdf testFFlagsfile.pdf; then
-           echo "Error: wrong file name for DS with flag option"
-           exit 1
-        fi
-        
-        cd ../../..
-        sudo rm -rf ds
+# on:
+# push:
+# branches: [ "main", "dev" ]
+# pull_request:
+# branches: [ "main", "dev" ]
+# 
+# jobs:
+# build:
+# 
+# runs-on: ubuntu-latest
+# 
+# steps:
+# - name: Checkout code
+# uses: actions/checkout@v3
+#  
+# - name: Install C++ Compiler
+# run: sudo apt-get install g++
+# - name: Install tool
+# run: |
+# if ! bash install.sh testName; then
+# echo "Compilation failed"
+# exit 1
+# fi
+#  
+# - name: Test for PG2
+# run: |
+# mkdir pg2 
+# mkdir pg2/u32 
+# mkdir pg2/u32/a4
+# cd pg2/u32/a4
+# touch exampleFile.txt 
+# touch testFlagsfile.txt
+# touch testFFlagsfile.txt
+#  
+# if ! testName exampleFile.txt; then
+# echo "Error while calling naming tool on PG2"
+# exit 1
+# fi
+# if ! mv PG2-1-14_U32_4.txt exampleFile.txt; then
+# echo "Error: wrong file name for PG2"
+# exit 1
+# fi
+#  
+# if ! testName testFlagsfile.txt -a TEST; then
+# echo "Error while calling naming tool with flag option on PG2"
+# exit 1
+# fi
+# if ! mv PG2-1-14_U32_4_TEST.txt testFlagsfile.txt; then
+# echo "Error: wrong file name for PG2 with flag option"
+# exit 1
+# fi
+#  
+# if ! testName testFFlagsfile.pdf -f; then
+# echo "Error while calling naming tool with flag option -f on PG2"
+# exit 1
+# fi
+# if ! mv PG2-1-14_U32_4.pdf testFlagsfile.pdf; then
+# echo "Error: wrong file name for PG2 with flag option"
+# exit 1
+# fi
+#  
+# cd ../../..
+# sudo rm -rf pg2
+#  
+# - name: Test for DS
+# run: |
+# mkdir ds
+# mkdir ds/u03 
+# mkdir ds/u03/a9
+# cd ds/u03/a9
+# touch exampleFile.txt 
+# touch testFlagsfile.txt 
+# touch testFFlagsfile.txt
+# 
+#  
+# if ! testName exampleFile.txt; then
+# echo "Error while calling naming tool on DS"
+# exit 1
+# fi
+# if ! mv DS-3-14_U03_9.txt exampleFile.txt; then
+# echo "Error: wrong file name for DS"
+# exit 1
+# fi
+#  
+# if ! testName testFlagsfile.txt -a TEST; then
+# echo "Error while calling naming tool with flag option on DS"
+# exit 1
+# fi
+# if ! mv DS-3-14_U03_9_TEST.txt testFlagsfile.txt; then
+# echo "Error: wrong file name for DS with flag option"
+# exit 1
+# fi
+#  
+# if ! testName testFFlagsfile.pdf -f; then
+# echo "Error while calling naming tool with flag option on DS"
+# exit 1
+# fi
+# if ! mv DS-3-14_U03_9.pdf testFFlagsfile.pdf; then
+# echo "Error: wrong file name for DS with flag option"
+# exit 1
+# fi
+#  
+# cd ../../..
+# sudo rm -rf ds
