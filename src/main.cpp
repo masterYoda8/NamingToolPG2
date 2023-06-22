@@ -4,7 +4,10 @@
 #include <cstdlib>
 #include <cstring>
 #include "utils.h"
+#include <cstdbool>
 
+bool fFlag = 0;
+bool aFlag = 0;
 
 int main(int argc, char* argv[]) {
     if (argc < 2 || argc > 5){
@@ -15,15 +18,23 @@ int main(int argc, char* argv[]) {
 
     std::filesystem::path filePath = static_cast<std::filesystem::path>(argv[1]);
 
-    addOldFileName(filePath);
-    
     std::string fileFormatExtension = ".txt";
     std::string addon = "";
 
     for (int i = 0; i < argc; i++) {
-        if (strcmp(argv[i], "-f") == 0) { fileFormatExtension = filePath.extension(); }
-        else if (strcmp(argv[i], "-a") == 0) { addon = "_" + static_cast<std::string>(argv[++i]); }  
+        if (strcmp(argv[i], "-f") == 0) { 
+            fileFormatExtension = filePath.extension(); 
+            fFlag = true;
+        }
+        else if (strcmp(argv[i], "-a") == 0) { 
+            addon = "_" + static_cast<std::string>(argv[++i]);
+            aFlag = true;
+        }  
     }
+
+    // only add old file name to file if new type is txt (could make problems if new file type is pdf and not txt)
+    if (!fFlag) {addOldFileName(filePath);}
+
 
     std::string newFileName = createFileName(addon, fileFormatExtension);
 
