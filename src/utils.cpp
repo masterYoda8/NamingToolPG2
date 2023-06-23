@@ -4,12 +4,17 @@
 #include <filesystem>
 #include <iostream>
 #include <fstream>
+#include <cstring>
+#include <cstdlib>
 
 #include "utils.h"
 
 
 static std::vector<subject> subjects;
 
+bool fFlag = 0;
+bool aFlag = 0;
+bool cFlag = 0;
 
 void initSubjectVector() {
     subject ds {"ds", "DS", "3-14"};
@@ -18,6 +23,22 @@ void initSubjectVector() {
     subjects.push_back(pg2);
     // add more subjects here
 }
+
+void checkForFlags(int argc, char* argv[], std::string & addon){
+    for (int i = 0; i < argc; i++) {
+        if (std::strcmp(argv[i], "-f") == 0) { 
+            fFlag = true;
+        }
+        else if (std::strcmp(argv[i], "-a") == 0) { 
+            aFlag = true;
+            addon = "_" + static_cast<std::string>(argv[++i]);
+        }
+        else if (std::strcmp(argv[i], "-c") == 0) {
+            cFlag = true;
+        }  
+    }
+}
+
 
 void addOldFileName(std::filesystem::path filePath) {
     std::ofstream outputFile("tmp");
@@ -35,21 +56,18 @@ void addOldFileName(std::filesystem::path filePath) {
     std::rename("tmp", filePath.c_str());
 }
 
-std::string createFileName(const std::string & addon, const std::string & fileFormatExtension) {
+std::string createFileName(const std::string & addon, const std::string & fileFormatExtension, const std::string & filePathString) {
     
     initSubjectVector();
 
-    // get current filepath
-    const std::string filePath = static_cast<std::string>(std::filesystem::current_path());
-
     // search for a subject in the current filepath; exit if no subject found
-    int subjectIndex = getSubjectIndex(filePath);
+    int subjectIndex = getSubjectIndex(filePathString);
     std::string subjectNameInFile = subjects.at(subjectIndex).nameInFile;
     std::string groupName = subjects.at(subjectIndex).groupName; 
 
     // extract numbers from path
-    std::string practiseNumber = extractPractiseNumber(filePath);
-    std::string taskNumber = extractTaskNumber(filePath);
+    std::string practiseNumber = extractPractiseNumber(filePathString);
+    std::string taskNumber = extractTaskNumber(filePathString);
 
     // create new filename and return
     std::stringstream newFileName;
