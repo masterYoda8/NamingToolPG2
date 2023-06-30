@@ -21,7 +21,6 @@ typedef struct {
 } subject;
 
 void initSubjectVector();
-void checkForFlags(int, char**, std::string &);
 void addOldFileName(std::filesystem::path);
 std::string createFileName(const std::string &, const std::string &, const std::string &);
 std::string extractPractiseNumber(const std::string &);

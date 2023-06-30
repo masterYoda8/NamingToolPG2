@@ -2,13 +2,9 @@
 #include <filesystem>
 #include <string>
 #include <cstring>
-#include <cstdbool>
 
-#include "utils.h"
-
-extern bool fFlag;
-extern bool aFlag;
-extern bool cFlag;
+#include "Libs/utils.h"
+#include "Libs/flags.h"
 
 
 int main(int argc, char* argv[]) {
@@ -25,14 +21,14 @@ int main(int argc, char* argv[]) {
     std::string addon = "";
     std::string fileToRename = argv[1];
 
-    checkForFlags(argc, argv, addon);
+    flags::checkForFlags(argc, argv, addon);
 
-    if (!fFlag) {
+    if (!(flags::isSet(flags::fFlag))) {
         addOldFileName(filePath);
     } else {
         fileFormatExtension = filePath.extension();
     } 
-    if (cFlag) {
+    if (flags::isSet(flags::cFlag)) {
         std::filesystem::path newTmpFileName = static_cast<std::filesystem::path>((filePathString + "_tmp"));
         std::filesystem::copy_file(filePath, newTmpFileName); 
         fileToRename = static_cast<std::string>(newTmpFileName);
@@ -42,7 +38,7 @@ int main(int argc, char* argv[]) {
     
     std::rename(fileToRename.c_str(), newFileName.c_str());
     
-    std::cout << ((cFlag) ? "Copied: ": "Renamed: ");
+    std::cout << ((flags::isSet(flags::cFlag)) ? "Copied: ": "Renamed: ");
     std::cout << argv[1] << " --> " << COLOR_GREEN << newFileName << COLOR_RESET << std::endl;
 
     return 0;

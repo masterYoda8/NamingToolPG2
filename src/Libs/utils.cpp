@@ -12,10 +12,6 @@
 
 static std::vector<subject> subjects;
 
-bool fFlag = 0;
-bool aFlag = 0;
-bool cFlag = 0;
-
 void initSubjectVector() {
     subject ds {"ds", "DS", "3-14"};
     subjects.push_back(ds);
@@ -23,22 +19,6 @@ void initSubjectVector() {
     subjects.push_back(pg2);
     // add more subjects here
 }
-
-void checkForFlags(int argc, char* argv[], std::string & addon){
-    for (int i = 0; i < argc; i++) {
-        if (std::strcmp(argv[i], "-f") == 0) { 
-            fFlag = true;
-        }
-        else if (std::strcmp(argv[i], "-a") == 0) { 
-            aFlag = true;
-            addon = "_" + static_cast<std::string>(argv[++i]);
-        }
-        else if (std::strcmp(argv[i], "-c") == 0) {
-            cFlag = true;
-        }  
-    }
-}
-
 
 void addOldFileName(std::filesystem::path filePath) {
     std::ofstream outputFile("tmp");
