@@ -8,6 +8,7 @@
 #include <cstdlib>
 
 #include "utils.h"
+#include "fileData.h"
 
 
 static std::vector<subject> subjects;
@@ -36,22 +37,22 @@ void addOldFileName(std::filesystem::path filePath) {
     std::rename("tmp", filePath.c_str());
 }
 
-std::string createFileName(const std::string & addon, const std::string & fileFormatExtension, const std::string & filePathString) {
+std::string createFileName(const fileData & file) {
     
     initSubjectVector();
 
     // search for a subject in the current filepath; exit if no subject found
-    int subjectIndex = getSubjectIndex(filePathString);
+    int subjectIndex = getSubjectIndex(file.filePathString);
     std::string subjectNameInFile = subjects.at(subjectIndex).nameInFile;
     std::string groupName = subjects.at(subjectIndex).groupName; 
 
     // extract numbers from path
-    std::string practiseNumber = extractPractiseNumber(filePathString);
-    std::string taskNumber = extractTaskNumber(filePathString);
+    std::string practiseNumber = extractPractiseNumber(file.filePathString);
+    std::string taskNumber = extractTaskNumber(file.filePathString);
 
     // create new filename and return
     std::stringstream newFileName;
-    newFileName <<  subjectNameInFile << '-' << groupName << "_U" << practiseNumber << "_" << taskNumber << addon << fileFormatExtension;
+    newFileName <<  subjectNameInFile << '-' << groupName << "_U" << practiseNumber << "_" << taskNumber << file.addon << file.fileFormatExtension;
     return newFileName.str();   
 }
 

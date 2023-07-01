@@ -5,6 +5,8 @@
 #include <vector>
 #include <filesystem>
 
+#include "fileData.h"
+
 const std::string PRACTISE_STRING = "/u";
 const std::string TASK_STRING = "/a";
 const std::string COLOR_RED = "\033[1;31m";
@@ -22,7 +24,7 @@ typedef struct {
 
 void initSubjectVector();
 void addOldFileName(std::filesystem::path);
-std::string createFileName(const std::string &, const std::string &, const std::string &);
+std::string createFileName(const fileData &);
 std::string extractPractiseNumber(const std::string &);
 std::string extractTaskNumber(const std::string &);
 int getSubjectIndex(const std::string &);

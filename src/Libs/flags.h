@@ -3,6 +3,7 @@
 
 #include <cstdint>
 #include <string> 
+#include "fileData.h"
 
 namespace flags {
     
@@ -12,7 +13,8 @@ namespace flags {
         cFlag
     } flag;
 
-    void checkForFlags(int, char**, std::string &);
+    void checkForFlags(int, char**, fileData &);
+    void applyFlags(fileData &);
     void setFlag(flag);
     bool isSet(flag);
 

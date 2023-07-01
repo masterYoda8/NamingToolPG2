@@ -11,7 +11,7 @@ if [ -z $1 ]; then
 fi
 
 # compile main.cpp using g++
-output=$(g++ -std=c++20 src/Libs/flags.cpp src/Libs/utils.cpp src/main.cpp -DBASH_NAME=\"$1\" -o $1)
+output=$(g++ -std=c++20 src/Libs/fileData.cpp src/Libs/flags.cpp src/Libs/utils.cpp src/main.cpp -DBASH_NAME=\"$1\" -o $1)
 
 # exit on compile error
 if [[ $? != 0 ]]; then
